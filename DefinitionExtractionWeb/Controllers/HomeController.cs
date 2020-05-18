@@ -17,10 +17,24 @@ namespace DefinitionExtractionWeb.Controllers
             return View();
         }
 
-        public ActionResult DefinitionView(int id)
+        public ActionResult DescriptorView(int id)
         {
-
+            ViewBag.Definitions = db.Descriptors.Find(id);
             return View();
         }
+
+        [HttpGet]
+        public ActionResult Search(string like)
+        {
+            ViewBag.Descriptors = db.Descriptors.Where(d => d.Descriptor_content.StartsWith(like));
+            return View("~/Views/Definitions/DescriptorsList.cshtml");
+        }
+
+        //[HttpPost]
+        //public ActionResult Search(string like)
+        //{
+        //    ViewBag.Descriptors = db.Descriptors.Where(d => d.Descriptor_content.StartsWith(like));
+        //    return View("Descriptors/Index");
+        //}
     }
 }

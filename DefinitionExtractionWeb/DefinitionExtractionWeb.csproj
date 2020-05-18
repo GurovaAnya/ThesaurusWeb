@@ -296,6 +296,8 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Definitions\Index.cshtml" />
+    <Content Include="Views\Home\DescriptorView.cshtml" />
+    <Content Include="Views\Definitions\DescriptorsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

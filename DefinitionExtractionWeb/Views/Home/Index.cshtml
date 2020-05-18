@@ -11,18 +11,12 @@
 </head>
 <body>
     <div>
-        <h3>Термины</h3>
-        <table>
-            <tr>
-                <td><p>Термин</p></td>
-            </tr>
-            @foreach (var desc in ViewBag.Descriptors)
-            {
-                <tr>
-                    <td><p><a href="/Home/More/@desc.ID">@desc.Descriptor_content </a>(@desc.Relator)</p></td>
-\                </tr>
-            }
-        </table>
+        <form method="get" action="/Home/Search">
+
+            <input type="text" name="like" /><br />
+
+            <button name="action" value="search">Искать</button>
+        </form>
     </div>
 </body>
 </html>

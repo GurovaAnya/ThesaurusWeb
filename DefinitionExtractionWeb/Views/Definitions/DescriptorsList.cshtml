@@ -1,0 +1,29 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Тезаурус</title>
+</head>
+<body>
+    <div>
+        <h3>Термины</h3>
+        <table>
+            <tr>
+                <td><p>Термин</p></td>
+            </tr>
+            @foreach (var desc in ViewBag.Descriptors)
+            {
+                <tr>
+                    <td><p><a href="/Home/DescriptorView/@desc.ID">@desc.Descriptor_content </a>(@desc.Relator)</p></td>
+                    \
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>
