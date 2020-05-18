@@ -15,12 +15,13 @@
         <table>
             <tr>
                 <td><p>Термин</p></td>
+                <td></td>
             </tr>
             @foreach (var desc in ViewBag.Descriptors)
             {
                 <tr>
-                    <td><p><a href="/Home/DescriptorView/@desc.ID">@desc.Descriptor_content </a>(@desc.Relator)</p></td>
-                    \
+                    <td><p><a href="/Home/DescriptorView/@desc.ID">@desc.Descriptor_content (@desc.Relator)</a></p></td>
+                    <td><p><a href="/Definitions/Edit/@desc.ID"> Изменить </a> </p></td>
                 </tr>
             }
         </table>
