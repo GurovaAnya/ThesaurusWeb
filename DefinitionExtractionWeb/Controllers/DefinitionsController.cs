@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Services.Description;
@@ -18,9 +19,9 @@ namespace DefinitionExtractionWeb.Controllers
         //    return View();
         //}
 
-        public ActionResult Index(int descID)
+        public async Task<ActionResult> Index(int descID)
         {
-            Descriptor desc = db.Descriptors.Find(descID); 
+            Descriptor desc = await db.Descriptors.FindAsync(descID); 
             return View(desc);
         }
 
@@ -38,12 +39,12 @@ namespace DefinitionExtractionWeb.Controllers
 
         //POST: Definitions/Create
         [HttpPost]
-        public ActionResult Create(Descriptor desc)
+        public async Task<ActionResult> Create(Descriptor desc)
         {
             try
             {
                 db.Descriptors.Add(desc);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
             }
             catch
@@ -59,14 +60,14 @@ namespace DefinitionExtractionWeb.Controllers
         //}
 
         [HttpGet]
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return HttpNotFound();
             }
 
-            Descriptor desc = db.Descriptors.Find(id);
+            Descriptor desc = await db.Descriptors.FindAsync(id);
 
             if (desc == null)
             {
@@ -76,10 +77,10 @@ namespace DefinitionExtractionWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Descriptor descriptor)
+        public async Task<ActionResult> Edit(Descriptor descriptor)
         {
             db.Entry(descriptor).State = EntityState.Modified;
-            db.SaveChanges();
+            await db.SaveChangesAsync();
             return RedirectToAction("Index", new {descID = descriptor.ID });
         }
 
@@ -107,14 +108,14 @@ namespace DefinitionExtractionWeb.Controllers
 
         // POST: Definitions/Delete/5
         //[HttpPost]
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             try
             {
-                var desc = db.Descriptors.Find(id);
+                var desc = await db.Descriptors.FindAsync(id);
                 //db.Entry(desc).State = EntityState.Deleted;
                 db.Descriptors.Remove(desc);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 var descriptors = db.Descriptors;
                 return RedirectToAction("Index", "Home");
             }

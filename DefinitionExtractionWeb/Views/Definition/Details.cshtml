@@ -1,0 +1,100 @@
+﻿@model DefinitionExtractionWeb.Models.Definition
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@{
+    var desc = Model.Descriptor; 
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Definition</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName(desc.Descriptor_content)
+        </dt>
+
+        <dd>
+            @Html.Display(desc.Descriptor_content)
+        </dd>
+        <dt>
+            @Html.DisplayName(desc.Relator)
+        </dt>
+
+        <dd>
+            @Html.Display(desc.Relator)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Definition_content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Definition_content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Start_line)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Start_line)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Start_char)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Start_char)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.End_line)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.End_line)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.End_char)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.End_char)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Insert_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Insert_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descriptor.Descriptor_content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descriptor.Descriptor_content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.First_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.First_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

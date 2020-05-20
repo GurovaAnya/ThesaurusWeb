@@ -1,5 +1,6 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var db = new DefinitionExtractionWeb.Models.DEDatabaseEntities();
 }
 
 <!DOCTYPE html>
@@ -16,5 +17,6 @@
             <button name="action" value="search">Искать</button>
         </form>
     </div>
+    <a href="/Definition/Details/@db.Definitions.Find(6).Descriptor.ID"> Редактировать </a>
 </body>
 </html>
