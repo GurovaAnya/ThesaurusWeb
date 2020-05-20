@@ -13,9 +13,9 @@ namespace DefinitionExtractionWeb.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DEModel : DbContext
+    public partial class DEDatabaseEntities : DbContext
     {
-        public DEModel()
+        public DEDatabaseEntities()
             : base("name=DEDatabaseEntities")
         {
         }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище DEModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище DEModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Ascriptors">
           <Key>
             <PropertyRef Name="ID" />
@@ -75,18 +75,6 @@
           <Property Name="Password_hash" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="registration_date" Type="date" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Ascriptors_Descriptors">
-          <End Role="Descriptors" Type="Self.Descriptors" Multiplicity="1" />
-          <End Role="Ascriptors" Type="Self.Ascriptors" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Descriptors">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Ascriptors">
-              <PropertyRef Name="Descriptor_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DefinitionLinks_DefinitionLinks">
           <End Role="Definitions" Type="Self.Definitions" Multiplicity="1" />
           <End Role="DefinitionLinks" Type="Self.DefinitionLinks" Multiplicity="*" />
@@ -99,18 +87,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DefinitionLinks_Definitions">
-          <End Role="Descriptors" Type="Self.Descriptors" Multiplicity="1" />
-          <End Role="DefinitionLinks" Type="Self.DefinitionLinks" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Descriptors">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="DefinitionLinks">
-              <PropertyRef Name="Descriptor_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Definitions_Descriptors">
           <End Role="Descriptors" Type="Self.Descriptors" Multiplicity="1" />
           <End Role="Definitions" Type="Self.Definitions" Multiplicity="*" />
@@ -120,42 +96,6 @@
             </Principal>
             <Dependent Role="Definitions">
               <PropertyRef Name="Descriptor_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Definitions_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Definitions" Type="Self.Definitions" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Definitions">
-              <PropertyRef Name="User_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Relations_Descriptors">
-          <End Role="Descriptors" Type="Self.Descriptors" Multiplicity="1" />
-          <End Role="Relations" Type="Self.Relations" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Descriptors">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Relations">
-              <PropertyRef Name="Descriptor1_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Relations_Descriptors1">
-          <End Role="Descriptors" Type="Self.Descriptors" Multiplicity="1" />
-          <End Role="Relations" Type="Self.Relations" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Descriptors">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Relations">
-              <PropertyRef Name="Descriptor2_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -179,41 +119,20 @@
           <EntitySet Name="Relation_types" EntityType="Self.Relation_types" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Relations" EntityType="Self.Relations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Ascriptors_Descriptors" Association="Self.FK_Ascriptors_Descriptors">
-            <End Role="Descriptors" EntitySet="Descriptors" />
-            <End Role="Ascriptors" EntitySet="Ascriptors" />
-          </AssociationSet>
           <AssociationSet Name="FK_DefinitionLinks_DefinitionLinks" Association="Self.FK_DefinitionLinks_DefinitionLinks">
             <End Role="Definitions" EntitySet="Definitions" />
-            <End Role="DefinitionLinks" EntitySet="DefinitionLinks" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DefinitionLinks_Definitions" Association="Self.FK_DefinitionLinks_Definitions">
-            <End Role="Descriptors" EntitySet="Descriptors" />
             <End Role="DefinitionLinks" EntitySet="DefinitionLinks" />
           </AssociationSet>
           <AssociationSet Name="FK_Definitions_Descriptors" Association="Self.FK_Definitions_Descriptors">
             <End Role="Descriptors" EntitySet="Descriptors" />
             <End Role="Definitions" EntitySet="Definitions" />
           </AssociationSet>
-          <AssociationSet Name="FK_Definitions_Users" Association="Self.FK_Definitions_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Definitions" EntitySet="Definitions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Relations_Descriptors" Association="Self.FK_Relations_Descriptors">
-            <End Role="Descriptors" EntitySet="Descriptors" />
-            <End Role="Relations" EntitySet="Relations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Relations_Descriptors1" Association="Self.FK_Relations_Descriptors1">
-            <End Role="Descriptors" EntitySet="Descriptors" />
-            <End Role="Relations" EntitySet="Relations" />
-          </AssociationSet>
           <AssociationSet Name="FK_Relations_Relation_types" Association="Self.FK_Relations_Relation_types">
             <End Role="Relation_types" EntitySet="Relation_types" />
             <End Role="Relations" EntitySet="Relations" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -304,7 +223,9 @@
           <NavigationProperty Name="Definitions" Relationship="Self.FK_Definitions_Users" FromRole="Users" ToRole="Definitions" />
         </EntityType>
         <Association Name="FK_Ascriptors_Descriptors">
-          <End Role="Descriptors" Type="Self.Descriptor" Multiplicity="1" />
+          <End Role="Descriptors" Type="Self.Descriptor" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Ascriptors" Type="Self.Ascriptor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Descriptors">
@@ -316,7 +237,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DefinitionLinks_DefinitionLinks">
-          <End Role="Definitions" Type="Self.Definition" Multiplicity="1" />
+          <End Role="Definitions" Type="Self.Definition" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="DefinitionLinks" Type="Self.DefinitionLink" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Definitions">
@@ -328,7 +251,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DefinitionLinks_Definitions">
-          <End Role="Descriptors" Type="Self.Descriptor" Multiplicity="1" />
+          <End Role="Descriptors" Type="Self.Descriptor" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="DefinitionLinks" Type="Self.DefinitionLink" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Descriptors">
@@ -340,7 +265,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Definitions_Descriptors">
-          <End Role="Descriptors" Type="Self.Descriptor" Multiplicity="1" />
+          <End Role="Descriptors" Type="Self.Descriptor" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Definitions" Type="Self.Definition" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Descriptors">
@@ -364,7 +291,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Relations_Descriptors">
-          <End Role="Descriptors" Type="Self.Descriptor" Multiplicity="1" />
+          <End Role="Descriptors" Type="Self.Descriptor" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Relations" Type="Self.Relation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Descriptors">
@@ -376,7 +305,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Relations_Descriptors1">
-          <End Role="Descriptors" Type="Self.Descriptor" Multiplicity="1" />
+          <End Role="Descriptors" Type="Self.Descriptor" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Relations" Type="Self.Relation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Descriptors">

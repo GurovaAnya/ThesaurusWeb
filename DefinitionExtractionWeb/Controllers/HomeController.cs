@@ -9,7 +9,7 @@ namespace DefinitionExtractionWeb.Controllers
 {
     public class HomeController : Controller
     {
-        DEModel db = new DEModel();
+        DEDatabaseEntities db = new DEDatabaseEntities();
         public ActionResult Index()
         {
             IEnumerable<Descriptor> desc = db.Descriptors;
@@ -26,8 +26,8 @@ namespace DefinitionExtractionWeb.Controllers
         [HttpGet]
         public ActionResult Search(string like="")
         {
-            ViewBag.Descriptors = db.Descriptors.Where(d => d.Descriptor_content.StartsWith(like));
-            return View("~/Views/Definitions/DescriptorsList.cshtml");
+            var descriptors = db.Descriptors.Where(d => d.Descriptor_content.StartsWith(like));
+            return View("~/Views/Definitions/DescriptorsList.cshtml", descriptors);
         }
 
         //[HttpPost]

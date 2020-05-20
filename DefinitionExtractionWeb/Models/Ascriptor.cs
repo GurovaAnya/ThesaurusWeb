@@ -11,11 +11,9 @@ namespace DefinitionExtractionWeb.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Web.Mvc;
-
+    
     public partial class Ascriptor
     {
-        [HiddenInput(DisplayValue = false)]
         public int ID { get; set; }
         public string Ascriptor_content { get; set; }
         public int Descriptor_ID { get; set; }

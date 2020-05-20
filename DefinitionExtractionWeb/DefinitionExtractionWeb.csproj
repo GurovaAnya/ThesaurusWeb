@@ -300,6 +300,8 @@
     <Content Include="Views\Home\DescriptorView.cshtml" />
     <Content Include="Views\Definitions\DescriptorsList.cshtml" />
     <Content Include="Views\Definitions\Edit.cshtml" />
+    <Content Include="Views\Definitions\Delete.cshtml" />
+    <Content Include="Views\Definitions\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

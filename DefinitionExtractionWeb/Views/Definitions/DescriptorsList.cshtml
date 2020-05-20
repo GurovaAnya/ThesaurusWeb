@@ -2,7 +2,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 <!DOCTYPE html>
+
+@model IQueryable<DefinitionExtractionWeb.Models.Descriptor>
 
 <html>
 <head>
@@ -12,19 +15,27 @@
 <body>
     <div>
         <h3>Термины</h3>
-        <table>
-            <tr>
-                <td><p>Термин</p></td>
-                <td></td>
-            </tr>
-            @foreach (var desc in ViewBag.Descriptors)
-            {
+        @if (Model.Count() == 0)
+        {
+            @Html.Label("Не найдено терминов по запросу");
+        }
+        else
+        {
+            <table>
                 <tr>
-                    <td><p><a href="/Home/DescriptorView/@desc.ID">@desc.Descriptor_content (@desc.Relator)</a></p></td>
-                    <td><p><a href="/Definitions/Edit/@desc.ID"> Изменить </a> </p></td>
+                    <td><p>Термин</p></td>
+                    <td></td>
                 </tr>
-            }
-        </table>
+                @foreach (var desc in Model)
+                {
+                    <tr>
+                        <td><p><a href="/Home/DescriptorView/@desc.ID">@desc.Descriptor_content (@desc.Relator)</a></p></td>
+                        <td><p><a href="/Definitions/Edit/@desc.ID"> Редактировать </a> | <a href="/Definitions/Delete/@desc.ID"> Удалить </a> </p></td>
+                    </tr>
+                }
+            </table>
+        }
+        @Html.ActionLink("Добавить", "Create", "Definitions")
     </div>
 </body>
 </html>

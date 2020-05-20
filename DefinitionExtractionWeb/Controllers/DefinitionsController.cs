@@ -5,12 +5,13 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 
 namespace DefinitionExtractionWeb.Controllers
 {
     public class DefinitionsController : Controller
     {
-        DEModel db = new DEModel();
+        DEDatabaseEntities db = new DEDatabaseEntities();
         // GET: Definitions
         //public ActionResult Index()
         //{
@@ -35,21 +36,21 @@ namespace DefinitionExtractionWeb.Controllers
             return View();
         }
 
-        // POST: Definitions/Create
-        //[HttpPost]
-        //public ActionResult Create(FormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add insert logic here
-
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
+        //POST: Definitions/Create
+        [HttpPost]
+        public ActionResult Create(Descriptor desc)
+        {
+            try
+            {
+                db.Descriptors.Add(desc);
+                db.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+            catch
+            {
+                return View();
+            }
+        }
 
         //// GET: Definitions/Edit/5
         //public ActionResult Edit(int id)
@@ -64,6 +65,7 @@ namespace DefinitionExtractionWeb.Controllers
             {
                 return HttpNotFound();
             }
+
             Descriptor desc = db.Descriptors.Find(id);
 
             if (desc == null)
@@ -103,20 +105,48 @@ namespace DefinitionExtractionWeb.Controllers
         //    return View();
         //}
 
-        //// POST: Definitions/Delete/5
+        // POST: Definitions/Delete/5
         //[HttpPost]
-        //public ActionResult Delete(int id, FormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add delete logic here
+        public ActionResult Delete(int? id)
+        {
+            try
+            {
+                var desc = db.Descriptors.Find(id);
+                //db.Entry(desc).State = EntityState.Deleted;
+                db.Descriptors.Remove(desc);
+                db.SaveChanges();
+                var descriptors = db.Descriptors;
+                return RedirectToAction("Index", "Home");
+            }
+            catch
+            {
+                return View();
+            }
+        }
 
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
+        //[HttpGet]
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
         //    {
-        //        return View();
+        //        return HttpNotFound();
         //    }
+
+        //    Descriptor desc = db.Descriptors.Find(id);
+
+        //    if (desc == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(desc);
+        //}
+
+        //[HttpPost]
+        //public ActionResult Delete(Descriptor descriptor)
+        //{
+        //    db.Entry(descriptor).State = EntityState.Modified;
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index", new { descID = descriptor.ID });
         //}
     }
 }
