@@ -14,10 +14,15 @@ namespace DefinitionExtractionWeb.Controllers
     {
         private DEDatabaseEntities db = new DEDatabaseEntities();
 
-        // GET: Descriptors
-        public ActionResult Index()
+        //// GET: Descriptors
+        //public ActionResult Index()
+        //{
+        //    return View(db.Descriptors.ToList());
+        //}
+
+        public ActionResult Index(string like="")
         {
-            return View(db.Descriptors.ToList());
+            return View(db.Descriptors.Where(desc=>desc.Relator.StartsWith(like)).ToList());
         }
 
         // GET: Descriptors/Details/5

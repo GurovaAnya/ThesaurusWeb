@@ -29,6 +29,7 @@ namespace DefinitionExtractionWeb.Controllers
         [HttpGet]
         public ActionResult Search(string like="")
         {
+            return RedirectToAction("Index", "Descriptors", new { like = like });
             var descriptors = db.Descriptors.Where(d => d.Descriptor_content.StartsWith(like));
             return View("~/Views/Definitions/DescriptorsList.cshtml", descriptors);
         }
