@@ -170,8 +170,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\DefinitionController.cs" />
+    <Compile Include="Controllers\Definitions1Controller.cs" />
     <Compile Include="Controllers\DefinitionsController.cs" />
+    <Compile Include="Controllers\DescriptorsController.cs" />
     <Compile Include="Controllers\EditDescriptorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -303,7 +304,16 @@
     <Content Include="Views\Definitions\Edit.cshtml" />
     <Content Include="Views\Definitions\Delete.cshtml" />
     <Content Include="Views\Definitions\Create.cshtml" />
-    <Content Include="Views\Definition\Details.cshtml" />
+    <Content Include="Views\Descriptors\Create.cshtml" />
+    <Content Include="Views\Descriptors\Delete.cshtml" />
+    <Content Include="Views\Descriptors\Details.cshtml" />
+    <Content Include="Views\Descriptors\Edit.cshtml" />
+    <Content Include="Views\Descriptors\Index.cshtml" />
+    <Content Include="Views\Definitions1\Create.cshtml" />
+    <Content Include="Views\Definitions1\Delete.cshtml" />
+    <Content Include="Views\Definitions1\Details.cshtml" />
+    <Content Include="Views\Definitions1\Edit.cshtml" />
+    <Content Include="Views\Definitions1\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -321,9 +331,7 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\EditDescriptor\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

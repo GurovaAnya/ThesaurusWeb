@@ -4,30 +4,12 @@
     ViewBag.Title = "Details";
 }
 
-@{
-    var desc = Model.Descriptor; 
-}
-
 <h2>Details</h2>
 
 <div>
     <h4>Definition</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayName(desc.Descriptor_content)
-        </dt>
-
-        <dd>
-            @Html.Display(desc.Descriptor_content)
-        </dd>
-        <dt>
-            @Html.DisplayName(desc.Relator)
-        </dt>
-
-        <dd>
-            @Html.Display(desc.Relator)
-        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Definition_content)
         </dt>
