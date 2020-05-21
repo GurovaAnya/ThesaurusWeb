@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -17,10 +18,11 @@ namespace DefinitionExtractionWeb.Controllers
             return View();
         }
 
-        public ActionResult DescriptorView(int id)
+        public async Task<ActionResult> DescriptorView(int id)
         {
-            ViewBag.Definitions = db.Descriptors.Find(id);
-            return View();
+            //ViewBag.Definitions = db.Descriptors.Find(id);
+            var desc = await db.Descriptors.FindAsync(id);
+            return View(desc);
         }
 
         [HttpGet]

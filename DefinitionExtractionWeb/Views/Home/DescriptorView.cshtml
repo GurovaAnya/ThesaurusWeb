@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "DescriptorView";
+    var definitions = Model.Definitions;
 }
 
 <h2>DescriptorView</h2>
@@ -59,8 +60,29 @@
         </dd>
 
     </dl>
+    @foreach (var definition in definitions)
+    {
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayName(definition.Definition_content)
+            </dt>
+
+            <dd>
+                @Html.Display(definition.Definition_content)
+            </dd>
+
+            <dt>
+                @Html.DisplayName(definition.Start_line.ToString())
+            </dt>
+
+            <dd>
+                @Html.Display(definition.Start_line.ToString())
+            </dd>
+        </dl>
+    }
+
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Редактировать", "Edit", "Definitions", new { id = Model.ID }, null) |
     @*@Html.ActionLink("Back to List", "Index")*@
 </p>

@@ -13,11 +13,6 @@ namespace DefinitionExtractionWeb.Controllers
     public class DefinitionsController : Controller
     {
         DEDatabaseEntities db = new DEDatabaseEntities();
-        // GET: Definitions
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
 
         public async Task<ActionResult> Index(int descID)
         {

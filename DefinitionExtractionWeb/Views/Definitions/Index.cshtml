@@ -4,7 +4,14 @@
 }
 
 @model DefinitionExtractionWeb.Models.Descriptor
+@{
+    var definitions = Model.Definitions;
+}
 
 <h2>@Model.Descriptor_content</h2>
 @Html.DisplayForModel()
+@*@foreach(var definition in definitions)
+{
+    @Html.DisplayForModel(definition);*@
+}
  

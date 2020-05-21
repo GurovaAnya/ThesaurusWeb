@@ -3,17 +3,19 @@
 <head>
     <meta charset="utf-8" />
     <title>@ViewBag.Title</title>
-    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/site.css")" rel="stylesheet" type="text/css" />
+    @RenderSection("Content", false)
 </head>
 
-<body>
+<body> 
     <nav>
-        <ul class="menu">
-            <li>@Html.ActionLink("Главная", "Index", "Home")</li>
-            <li>@Html.ActionLink("Еще раз главная", "Index", "Home")</li>
+    <ul>
+        <li>@Html.ActionLink("Главная", "Index", "Home")</li>
+        <li>@Html.ActionLink("Отчет", "Index", "Home")</li>
+        <li>@Html.ActionLink("Еще раз главная", "Index", "Home")</li>
 
-        </ul>
-    </nav>
+    </ul>
+        </nav>
     @RenderBody()
 </body>
 </html>
