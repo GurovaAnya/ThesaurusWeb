@@ -1,0 +1,36 @@
+﻿@model List<DefinitionExtractionWeb.Models.Definition>
+
+<h2>Результаты</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Descriptor.Descriptor_content)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Descriptor.Relator)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Definition_content)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descriptor.Descriptor_content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descriptor.Relator)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Definition_content)
+            </td>
+            <td>
+                @Html.ActionLink("Подробнее", "Details", "Descriptors", new { id = item.Descriptor.ID }, null)
+            </td>
+        </tr>
+    }
+
+</table>
