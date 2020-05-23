@@ -1,0 +1,51 @@
+﻿@model DefinitionExtractionWeb.ViewModels.ChartViewModel
+
+<h2>@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-md-4">
+        <table>
+            <tr>
+                <th>
+                    @Html.Label("Пользователь")
+                </th>
+                <th>
+                    @Html.Label("Почта")
+                </th>
+                <th>
+                    @Html.Label("Определения")
+                </th>
+            </tr>
+            @*@foreach(var info in Model.Data)
+        {
+            <tr>
+                <td>
+                    @info.FullName
+                </td>
+                 <td>
+                    @info.Email
+                 </td>
+                 <td>
+                    @info.DefinitionID
+                 </td>
+             </tr>
+        }*@
+            @foreach (var info in ViewBag.Info)
+            {
+                <tr>
+                    <td>
+                        @info.FullName
+                    </td>
+                    <td>
+                        @info.Email
+                    </td>
+                    <td>
+                        @info.Count
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="col-md-4">
+        <p><img src="UsersDiagram.jpeg" /> </p>
+    </div>
+</div>

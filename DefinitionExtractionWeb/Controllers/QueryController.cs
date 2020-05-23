@@ -16,10 +16,10 @@ namespace DefinitionExtractionWeb.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult Index()
         { 
-            QueryViewModel objcvm = new QueryViewModel(); // ViewModel
+            QueryViewModel que = new QueryViewModel(); // ViewModel
             ViewBag.Descriptor_ID = new SelectList(db.Descriptors, "ID", "Descriptor_content");
             ViewBag.Type_ID = new SelectList(db.Relation_types, "ID", "Type_name");
-            return View(objcvm); 
+            return View(que); 
         }
 
         [HttpPost]

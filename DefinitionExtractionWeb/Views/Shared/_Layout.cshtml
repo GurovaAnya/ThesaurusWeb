@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <title>@ViewBag.Title</title>
     @*<link href="@Url.Content("~/Content/site.css")" rel="stylesheet" type="text/css" />*@
-    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
+    @*<link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />*@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -17,7 +17,7 @@
     <nav>
         <ul>
             <li>@Html.ActionLink("Главная", "Index", "Home")</li>
-            <li>@Html.ActionLink("Отчет", "Index", "Home")</li>
+            <li>@Html.ActionLink("Отчет", "Index", "Charts")</li>
             <li>@Html.ActionLink("Фильтр", "Index", "Query")</li>
 
         </ul>

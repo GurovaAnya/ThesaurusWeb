@@ -1,0 +1,14 @@
+﻿@*@model DefinitionExtractionWeb.ViewModels.ChartViewModel*@
+@{
+    var myChart = new Chart(width: 600, height: 400)
+                    .AddTitle("Пользователи")
+                    .AddSeries(chartType: "Pie",
+                        xValue: ViewBag.Model.Data, xField: "UserID",
+                        yValues: ViewBag.Model.Data, yFields: "DefinitionID")
+                    .Write();
+}
+
+
+@{ 
+    var chart = Chart.WriteFromCache("UsersDiagram");
+}

@@ -1,7 +1,54 @@
 ﻿
+@model DateTime[]
+
 @{
-    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+Html.BeginForm()
+
+@*@Html.AntiForgeryToken()*@
+
+<div>
+
+    @using (Ajax.BeginForm("Submit", new AjaxOptions { UpdateTargetId = "results", HttpMethod = "Post", InsertionMode = InsertionMode.Replace }))
+    {
+        <div class="row">
+
+            <div class="col-md-3">
+                @Html.Label("Начало", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div>
+                    @Html.EditorFor(model => model[0], new { htmlAttributes = new { @class = "form-control datepicker", @Value = Model[0].ToString("yyyy/MM/dd") } })
+                    @Html.ValidationMessageFor(model => model[0], "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                @Html.Label("Конец", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div>
+                    @Html.EditorFor(model => model[1], new { htmlAttributes = new { @class = "form-control datepicker", @Value = Model[1].ToString("yyyy/MM/dd") } })
+                    @Html.ValidationMessageFor(model => model[1], "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-5 col-md-2">
+                <input type="submit" value="Искать" class="btn btn-default" />
+            </div>
+        </div>
+    }
+    
+    @*@{ 
+        var chart = Chart.WriteFromCache("UsersDiagram");
+    }*@
+
+    <div id="results"></div>
+
+</div>
 
