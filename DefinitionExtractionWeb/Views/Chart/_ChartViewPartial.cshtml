@@ -1,0 +1,47 @@
+﻿@model List<DefinitionExtractionWeb.ViewModels.UserTableViewModel>
+
+<h2>@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-md-4">
+        <div>
+            @*@using (Html.BeginForm("DownloadStats", "Charts", FormMethod.Post, new { name = ViewBag.Name}))*@
+            {
+                <table>
+                    <tr>
+                        <th>
+                            @Html.Label("Пользователь")
+                        </th>
+                        <th>
+                            @Html.Label("Почта")
+                        </th>
+                        <th>
+                            @Html.Label("Определения")
+                        </th>
+                    </tr>
+                    @foreach (var info in Model)
+                    {
+                        <tr>
+                            <td>
+                                @info.FullName
+                            </td>
+                            <td>
+                                @info.Email
+                            </td>
+                            <td>
+                                @info.Count
+                            </td>
+                        </tr>
+                    }
+                </table>
+            @*<div>
+                <input type="submit" value="Сохранить" />
+            </div>*@
+                @Html.ActionLink("Сохранить", "DownloadStats", new { name = (ViewBag.Name).ToString() })
+            
+        </div>
+       
+    </div>
+    <div class="col-md-4">
+        <p><img src="~/Charts/UsersDiagram.jpeg" /> </p>
+    </div>
+</div>

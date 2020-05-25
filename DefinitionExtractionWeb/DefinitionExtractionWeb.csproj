@@ -174,8 +174,9 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Charts\TempUserInfo.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ChartsController.cs" />
+    <Compile Include="Controllers\ChartController.cs" />
     <Compile Include="Controllers\Definitions1Controller.cs" />
     <Compile Include="Controllers\DefinitionsController.cs" />
     <Compile Include="Controllers\DescriptorsController.cs" />
@@ -269,6 +270,7 @@
     <Content Include="Models\DEModel.edmx.diagram">
       <DependentUpon>DEModel.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\DefinitionExtractionWeb - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\Chart.min.js" />
@@ -334,7 +336,7 @@
     <Content Include="Views\Definitions1\Details.cshtml" />
     <Content Include="Views\Definitions1\Edit.cshtml" />
     <Content Include="Views\Definitions1\Index.cshtml" />
-    <Content Include="Views\Charts\Index.cshtml" />
+    <Content Include="Views\Chart\Index.cshtml" />
     <Content Include="Views\Query\Edit.cshtml" />
     <Content Include="Views\Query\Index.cshtml" />
     <Content Include="Views\Query\Results.cshtml" />
@@ -344,8 +346,9 @@
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\Charts\_ChartViewPartial.cshtml" />
-    <Content Include="Views\Charts\_UsersChart.cshtml" />
+    <Content Include="Views\Chart\_ChartViewPartial.cshtml" />
+    <Content Include="Views\Chart\_UsersChart.cshtml" />
+    <Content Include="Views\Chart\DownloadStats.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -363,9 +366,7 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Charts\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

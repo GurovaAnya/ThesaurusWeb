@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
+using System.Threading.Tasks;
 using System.Web;
+using System.Web.Mvc;
 using System.Windows.Forms;
 using Word = Microsoft.Office.Interop.Word;
+
 
 namespace DefinitionExtractionWeb.Export
 {
@@ -13,33 +16,45 @@ namespace DefinitionExtractionWeb.Export
     {
         Word.Application app;
         Word.Document document;
+        string path;
+        string name;
 
-        public WordReport(string templateName = "_template.docx")
+        public WordReport(string path, string templateName = "_template.docx")
         {
             app = new Word.Application();
             app.Visible = false;
-            string name = $"new{DateTime.Now.Ticks}.docx";
-            File.Copy(AppDomain.CurrentDomain.BaseDirectory + templateName, AppDomain.CurrentDomain.BaseDirectory + name);
-            document = app.Documents.Open(AppDomain.CurrentDomain.BaseDirectory + name);
+            //name = $"Report{DateTime.Now.Ticks}.docx";
+            //path = AppDomain.CurrentDomain.BaseDirectory + name;
+            this.path = path;
+            File.Copy(AppDomain.CurrentDomain.BaseDirectory + templateName, path);
         }
-        public void Apply(string currentUser, string period, List<ViewModels.UserTableViewModel> stats)
+        public string Apply(string currentUser, string period, List<ViewModels.UserTableViewModel> stats)
         {
             try
             {
-                ReplaceWord("{currentDate}", DateTime.Now.ToString("dd.MM.yyyy"));
-                ReplaceWord("{currentUser}", currentUser);
-                ReplaceWord("{period}", period);
+                document = app.Documents.Open(path);
+                ReplaceByWord("{currentDate}", DateTime.Now.ToString("dd.MM.yyyy"));
+                ReplaceByWord("{currentUser}", currentUser);
+                ReplaceByWord("{period}", period);
                 AddTable(stats);
-                document.SaveAs("Report" + DateTime.Now.Ticks.ToString());
+                //string name = "Report" + DateTime.Now.Ticks.ToString();
+                //path = AppDomain.CurrentDomain.BaseDirectory + name;
+                //File.Create(path);
+                //document.Save();
+                //document.SaveAs()
+                //document.SaveAs(FileName: name);
+                return document.Name;
             }
             finally
             {
-                document.Close();
+                document.Close(SaveChanges:true);
                 app.Quit();
             }
         }
 
-        private void ReplaceWord(string template, string replacement)
+
+
+        private void ReplaceByWord(string template, string replacement)
         {
             var range = document.Content;
             range.Find.ClearFormatting();
@@ -61,5 +76,21 @@ namespace DefinitionExtractionWeb.Export
 
             }
         }
+
+        //public async Task<ActionResult> Download()
+        //{
+        //    var memory = new MemoryStream();
+        //    using (var stream = new FileStream(path, FileMode.Open))
+        //    {
+        //        await stream.CopyToAsync(memory);
+        //    }
+        //    memory.Position = 0;
+        //    return File(memory, "application/vnd.ms-word", Path.GetFileName(path));
+
+        //    Response.ContentType = "application/pdf";
+        //    Response.AppendHeader("Content-Disposition", "attachment; filename=MyFile.pdf");
+        //    Response.TransmitFile(Server.MapPath("~/Files/MyFile.pdf"));
+        //    Response.End();
+        //}
     }
 }
