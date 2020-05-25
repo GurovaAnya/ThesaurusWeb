@@ -32,6 +32,11 @@ namespace DefinitionExtractionWeb.Queries
         {
             var data = db.Definitions.Where(def => def.Insert_date >= beg && def.Insert_date <= end)
                 .Select(def => new StatsViewModel(){ User = def.User, Definition = def }).ToList();
+            var info = db.Users.Select(user => new UserTableViewModel{ FullName = user.First_name + " " + user.Last_name, 
+                Email = user.Email, Count = user.Definitions.Count
+                //(def=>def.Insert_date>=dates[0]&&def.Insert_date<=dates[1]) 
+            })
+                .OrderByDescending(user=>user.Count).ToList();
             return new ChartViewModel(beg, end, data);
         }
 
@@ -48,6 +53,19 @@ namespace DefinitionExtractionWeb.Queries
                 UserName = user.First_name + " " + user.Last_name, Count = user.Definitions.Count }).ToList();
 
             return def;
+        }
+
+        public List<UserTableViewModel> GetUsersStatistics(DateTime beg, DateTime end)
+        {
+            var info = db.Users.Select(user => new UserTableViewModel
+            {
+                FullName = user.First_name + " " + user.Last_name,
+                Email = user.Email,
+                Count = user.Definitions.Count
+                //(def=>def.Insert_date>=dates[0]&&def.Insert_date<=dates[1]) 
+            })
+                .OrderByDescending(user => user.Count).ToList();
+            return info;
         }
     }
 }

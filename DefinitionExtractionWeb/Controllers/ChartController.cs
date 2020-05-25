@@ -17,7 +17,7 @@ namespace DefinitionExtractionWeb.Controllers
     public class ChartController : Controller
     {
         DEDatabaseEntities db = new DEDatabaseEntities();
-        List<UserTableViewModel> table;
+
         // GET: Charts
         public ActionResult Index()
         {
@@ -25,24 +25,28 @@ namespace DefinitionExtractionWeb.Controllers
         }
 
 
+        /// <summary>
+        /// Получаем информацию по запросу 
+        /// </summary>
+        /// <param name="dates">Границы добавления определений</param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Submit(DateTime [] dates)
         {
             DEQueries deq = new DEQueries();
-            var model = deq.GetChartForUsers(dates[0], dates[1]);
-            ViewBag.Model = model;
-            var info = db.Users.Select(user => new UserTableViewModel{ FullName = user.First_name + " " + user.Last_name, 
-                Email = user.Email, Count = user.Definitions.Count
-                //(def=>def.Insert_date>=dates[0]&&def.Insert_date<=dates[1]) 
-            })
-                .OrderByDescending(user=>user.Count).ToList();
-            table = info;
+            var info = deq.GetUsersStatistics(dates[0], dates[1]);
             var myChart = GenerateChartImage(info);
             ViewBag.Info = info;
-            ViewBag.Name = CreateStats(info);
+            ViewBag.Beg = dates[0];
+            ViewBag.End = dates[1];
             return PartialView("_ChartViewPartial", info);
         }
 
+        /// <summary>
+        /// Создаем изображение графика по информации
+        /// </summary>
+        /// <param name="info">Список с информацией по каждому пользователю</param>
+        /// <returns></returns>
         public Chart GenerateChartImage(List<UserTableViewModel> info)
         {
             return new Chart(width: 600, height: 400)
@@ -52,26 +56,31 @@ namespace DefinitionExtractionWeb.Controllers
                 .Save("~/Charts/UsersDiagram.jpeg", "jpeg");
         }
 
-       
-        public string CreateStats(List<UserTableViewModel> info)
+
+        /// <summary>
+        /// Составление отчета по пользователям
+        /// </summary>
+        /// <param name="beg">Начало</param>
+        /// <param name="end">Конец</param>
+        /// <returns></returns>
+        public ActionResult DownloadStats(DateTime beg, DateTime end)
         {
+            var deq = new DEQueries();
+            //Получение информации
+            var info = deq.GetUsersStatistics(beg, end);
+            //Название документа
             string name = $"Отчет от {DateTime.Now.ToString("dd-MM-yyyy hh-mm-ss")}.docx";
             Export.WordReport word = new Export.WordReport(Server.MapPath("~/Charts/" + name));
-            word.Apply("Я", "kcmakd", info);
-            return name;
-        }
-
-        //[HttpPost]
-        public ActionResult DownloadStats(string name)
-        {
+            //Создаем документ
+            word.Apply("Я", $"c {beg.ToString("dd.MM.yyyy")} по {end.ToString("dd.MM.yyyy")}", info);
             Response.ContentType = "Application/msword";
             Response.AppendHeader("Content-Disposition", "attachment; filename=" + name);
+            //Передаем документ пользователю
             Response.TransmitFile(Server.MapPath("~/Charts/" + name));
             Response.End();
+            //Удаляем файл после возвращения
+            System.IO.File.Delete(Server.MapPath("~/Charts/" + name));
             return new EmptyResult();
-
         }
-
-
     }
 }
