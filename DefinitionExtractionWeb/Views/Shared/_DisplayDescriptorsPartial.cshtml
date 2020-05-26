@@ -7,7 +7,7 @@
             @Html.DisplayNameFor(model => model.FirstOrDefault().Descriptor.Descriptor_content)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FirstOrDefault().Descriptor.Relator)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Descriptor.Relator1.Content)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.FirstOrDefault().Definition_content)
@@ -22,7 +22,7 @@
                 @Html.DisplayFor(modelItem => item.Descriptor.Descriptor_content)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Descriptor.Relator)
+                @Html.DisplayFor(modelItem => item.Descriptor.Relator1.Content)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Definition_content)

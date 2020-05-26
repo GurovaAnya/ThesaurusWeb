@@ -21,8 +21,8 @@ namespace DefinitionExtractionWeb.Queries
                 .Where
                 (definition => definition.Insert_date >= beg
                 && definition.Insert_date <= end
-                && (definition.Descriptor.Relations.Where(r => r.Descriptor.ID == relDescID).Select(r=>r.Relation_types).Where(r=>r.ID==relID).Count()>0
-                || definition.Descriptor.Relations1.Where(r=>r.Descriptor1.ID==relDescID).Select(r => r.Relation_types).Where(r => r.ID == relID).Count() > 0)
+                && (definition.Descriptor.Relations.Where(r => r.Descriptor1.ID == relDescID).Select(r=>r.Relation_types).Where(r=>r.ID==relID).Count()>0
+                || definition.Descriptor.Relations1.Where(r=>r.Descriptor.ID==relDescID).Select(r => r.Relation_types).Where(r => r.ID == relID).Count() > 0)
                 )
                 .ToList();
             return def;

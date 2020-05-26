@@ -12,16 +12,15 @@ namespace DefinitionExtractionWeb.Controllers
     public class HomeController : Controller
     {
         DEDatabaseEntities db = new DEDatabaseEntities();
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            IEnumerable<Descriptor> desc = db.Descriptors;
+            IEnumerable<Descriptor> desc = await db.Descriptors.ToListAsync(); ;
             ViewBag.Descriptors = desc;
             return View();
         }
 
         public async Task<ActionResult> DescriptorView(int id)
         {
-            //ViewBag.Definitions = db.Descriptors.Find(id);
             var desc = await db.Descriptors.FindAsync(id);
             return View(desc);
         }
@@ -30,15 +29,6 @@ namespace DefinitionExtractionWeb.Controllers
         public ActionResult Search(string like="")
         {
             return RedirectToAction("Index", "Descriptors", new { like = like });
-            var descriptors = db.Descriptors.Where(d => d.Descriptor_content.StartsWith(like));
-            return View("~/Views/Definitions/DescriptorsList.cshtml", descriptors);
         }
-
-        //[HttpPost]
-        //public ActionResult Search(string like)
-        //{
-        //    ViewBag.Descriptors = db.Descriptors.Where(d => d.Descriptor_content.StartsWith(like));
-        //    return View("Descriptors/Index");
-        //}
     }
 }

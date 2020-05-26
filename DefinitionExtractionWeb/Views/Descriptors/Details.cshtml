@@ -1,4 +1,78 @@
-﻿@model DefinitionExtractionWeb.Models.Descriptor
+﻿@*@model DefinitionExtractionWeb.Models.Descriptor
+
+    @{
+        ViewBag.Title = "Details";
+    }
+
+    <h2>Details</h2>
+
+    <div>
+        <h4>Descriptor</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Relator1.Content)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Relator1.Content)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Descriptor_content)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Descriptor_content)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Start_line)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Start_line)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Start_char)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Start_char)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.End_line)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.End_line)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.End_char)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.End_char)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Relator)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Relator)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@
+@model DefinitionExtractionWeb.Models.Descriptor
 
 @{
     ViewBag.Title = Model.Descriptor_content;
@@ -13,9 +87,9 @@
     <dl class="dl-horizontal">
         <dt>
 
-            @if (Model.Relator != null && Model.Relator.Length > 0)
+            @if (Model.Relator1 != null && Model.Relator1.Content.Length > 0)
             {
-                @Model.Relator
+                @Model.Relator1.Content
             }
         </dt>
 

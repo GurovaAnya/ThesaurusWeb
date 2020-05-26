@@ -287,11 +287,6 @@
     <Content Include="Views\Definitions\Edit.cshtml" />
     <Content Include="Views\Definitions\Delete.cshtml" />
     <Content Include="Views\Definitions\Create.cshtml" />
-    <Content Include="Views\Descriptors\Create.cshtml" />
-    <Content Include="Views\Descriptors\Delete.cshtml" />
-    <Content Include="Views\Descriptors\Details.cshtml" />
-    <Content Include="Views\Descriptors\Edit.cshtml" />
-    <Content Include="Views\Descriptors\Index.cshtml" />
     <Content Include="Views\Definitions1\Create.cshtml" />
     <Content Include="Views\Definitions1\Delete.cshtml" />
     <Content Include="Views\Definitions1\Details.cshtml" />
@@ -310,6 +305,11 @@
     <Content Include="Views\Chart\_ChartViewPartial.cshtml" />
     <Content Include="Views\Chart\_UsersChart.cshtml" />
     <Content Include="Views\Chart\DownloadStats.cshtml" />
+    <Content Include="Views\Descriptors\Create.cshtml" />
+    <Content Include="Views\Descriptors\Delete.cshtml" />
+    <Content Include="Views\Descriptors\Details.cshtml" />
+    <Content Include="Views\Descriptors\Edit.cshtml" />
+    <Content Include="Views\Descriptors\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

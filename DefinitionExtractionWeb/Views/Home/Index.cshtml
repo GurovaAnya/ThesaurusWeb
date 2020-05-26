@@ -11,13 +11,21 @@
     <title>Тезаурус</title>
 </head>
 <body>
+    <div class="text-center">
+        <h1>Тезаурус</h1>
+
+        Введите термин и найдите определение для него!
+    </div>
     <searchbox>
+        
         <form method="get" action="/Home/Search">
-            <div>
-                <input type="text" name="like" /><br />
-            </div>
-            <div>
-                <button name="action" value="search">Искать</button>
+            <div class="row row-no-gutters">
+                <div class="col-md-offset-4 col-md-3">
+                    @Html.Editor("like", null, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="col-md-1">
+                    <input type="submit" value="Искать" class="btn btn-default" />
+                </div>
             </div>
         </form>
     </searchbox>
