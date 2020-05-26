@@ -12,8 +12,10 @@ namespace DefinitionExtractionWeb.Models
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Аскриптор")]
         public string Ascriptor_content { get; set; }
 
+        [Display(Name = "Связанный дескриптор")]
         public int Descriptor_ID { get; set; }
 
         public virtual Descriptor Descriptor { get; set; }

@@ -51,7 +51,7 @@ namespace DefinitionExtractionWeb.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Descriptor_content,Start_line,Start_char,End_line,End_char,Relator")] Descriptor descriptor)
+        public ActionResult Create([Bind(Include = "Descriptor_content,Start_line,Start_char,End_line,End_char,RelatorID")] Descriptor descriptor)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace DefinitionExtractionWeb.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Descriptor_content,Start_line,Start_char,End_line,End_char,Relator,ID")] Descriptor descriptor)
+        public ActionResult Edit([Bind(Include = "Descriptor_content,Start_line,Start_char,End_line,End_char,RelatorID")] Descriptor descriptor)
         {
             if (ModelState.IsValid)
             {

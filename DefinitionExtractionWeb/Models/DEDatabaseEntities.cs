@@ -18,6 +18,7 @@ namespace DefinitionExtractionWeb.Models
         public virtual DbSet<Descriptor> Descriptors { get; set; }
         public virtual DbSet<Relation_types> Relation_types { get; set; }
         public virtual DbSet<Relation> Relations { get; set; }
+        public virtual DbSet<Relator> Relators { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -63,6 +64,10 @@ namespace DefinitionExtractionWeb.Models
                 .WithRequired(e => e.Relation_types)
                 .HasForeignKey(e => e.Relation_type_ID)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Relator>()
+                .Property(e => e.Content)
+                .IsUnicode(false);
 
             modelBuilder.Entity<User>()
                 .HasMany(e => e.Definitions)

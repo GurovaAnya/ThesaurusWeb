@@ -6,22 +6,23 @@ namespace DefinitionExtractionWeb.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Relation_types
+    public partial class Relator
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Relation_types()
+        public Relator()
         {
-            Relations = new HashSet<Relation>();
+            Descriptors = new HashSet<Descriptor>();
         }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
 
         [Required]
-        [StringLength(100)]
-        [Display(Name = "Название связи")]
-        public string Type_name { get; set; }
+        [StringLength(50)]
+        [Display(Name = "Релятор")]
+        public string Content { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Relation> Relations { get; set; }
+        public virtual ICollection<Descriptor> Descriptors { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 @model DefinitionExtractionWeb.ViewModels.QueryViewModel
 @using DefinitionExtractionWeb.Models
-@{ 
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -10,13 +10,13 @@
     var db = new DefinitionExtractionWeb.Models.DEDatabaseEntities();
 }
 
-<h2>Edit</h2>
+<div class="container">
 
-Html.BeginForm()
+    <h2>Edit</h2>
 
-@*@Html.AntiForgeryToken()*@
 
-<div>
+    @*@Html.AntiForgeryToken()*@
+
 
     @using (Ajax.BeginForm("DefinitionSearch", new AjaxOptions { UpdateTargetId = "results", HttpMethod = "Post", InsertionMode = InsertionMode.Replace }))
     {
@@ -63,6 +63,6 @@ Html.BeginForm()
     }
 
     <div id="results"></div>
-
 </div>
+
 
