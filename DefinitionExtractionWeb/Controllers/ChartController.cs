@@ -21,7 +21,10 @@ namespace DefinitionExtractionWeb.Controllers
         // GET: Charts
         public ActionResult Index()
         {
-            return View(new DateTime[] { DateTime.Now, DateTime.Now });
+            if (HttpContext.User.Identity.IsAuthenticated)
+                return View(new DateTime[] { DateTime.Now, DateTime.Now });
+            else
+                return RedirectToAction("Login", "Authentification");
         }
 
 
@@ -72,7 +75,7 @@ namespace DefinitionExtractionWeb.Controllers
             string name = $"Отчет от {DateTime.Now.ToString("dd-MM-yyyy hh-mm-ss")}.docx";
             Export.WordReport word = new Export.WordReport(Server.MapPath("~/Charts/" + name));
             //Создаем документ
-            word.Apply("Я", $"c {beg.ToString("dd.MM.yyyy")} по {end.ToString("dd.MM.yyyy")}", info);
+            word.Apply(User.Identity.Name, $"c {beg.ToString("dd.MM.yyyy")} по {end.ToString("dd.MM.yyyy")}", info);
             Response.ContentType = "Application/msword";
             Response.AppendHeader("Content-Disposition", "attachment; filename=" + name);
             //Передаем документ пользователю

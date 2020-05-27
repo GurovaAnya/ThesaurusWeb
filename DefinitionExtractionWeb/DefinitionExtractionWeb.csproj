@@ -183,7 +183,6 @@
     <Compile Include="Controllers\Definitions1Controller.cs" />
     <Compile Include="Controllers\DefinitionsController.cs" />
     <Compile Include="Controllers\DescriptorsController.cs" />
-    <Compile Include="Controllers\EditDescriptorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\QueryController.cs" />

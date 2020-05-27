@@ -40,8 +40,13 @@ namespace DefinitionExtractionWeb.Controllers
         // GET: Descriptors/Create
         public ActionResult Create()
         {
-            ViewBag.RelatorID = new SelectList(db.Relators, "ID", "Content");
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.RelatorID = new SelectList(db.Relators, "ID", "Content");
+                return View();
+            }
+            else
+                return RedirectToAction("Login", "Authentification");
         }
 
         // POST: Descriptors/Create
@@ -65,17 +70,22 @@ namespace DefinitionExtractionWeb.Controllers
         // GET: Descriptors/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (User.Identity.IsAuthenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Descriptor descriptor = await db.Descriptors.FindAsync(id);
+                if (descriptor == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.RelatorID = new SelectList(db.Relators, "ID", "Content", descriptor.RelatorID);
+                return View(descriptor);
             }
-            Descriptor descriptor = await db.Descriptors.FindAsync(id);
-            if (descriptor == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.RelatorID = new SelectList(db.Relators, "ID", "Content", descriptor.RelatorID);
-            return View(descriptor);
+            else
+                return RedirectToAction("Login", "Authentification");
         }
 
         // POST: Descriptors/Edit/5
@@ -98,16 +108,21 @@ namespace DefinitionExtractionWeb.Controllers
         // GET: Descriptors/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (User.Identity.IsAuthenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Descriptor descriptor = await db.Descriptors.FindAsync(id);
+                if (descriptor == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(descriptor);
             }
-            Descriptor descriptor = await db.Descriptors.FindAsync(id);
-            if (descriptor == null)
-            {
-                return HttpNotFound();
-            }
-            return View(descriptor);
+            else
+                return RedirectToAction("Login", "Authentification");
         }
 
         // POST: Descriptors/Delete/5
