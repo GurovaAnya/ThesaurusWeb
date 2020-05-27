@@ -14,23 +14,59 @@
 </head>
 
 <body>
-    <nav>
-        <ul>
-            <li>@Html.ActionLink("Главная", "Index", "Home")</li>
-            <li>@Html.ActionLink("Отчет", "Index", "Chart")</li>
-            <li>@Html.ActionLink("Фильтр", "Index", "Query")</li>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark"   style="background-color: #333333;">
+            <a class="navbar-brand" href="#">Тезаурус</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="Home/Index">Главная <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Chart/Index">Отчеты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Query/Index">Фильтр</a>
+                    </li>
+                </ul>
 
-        </ul>
-    </nav>
+                <form class="form-inline">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                    <div class="nav-item">
+                        <a class="text-light">
+                            @HttpContext.Current.User.Identity.Name
+                        </a>
+                    </div>
+                       
+                        <button class="btn btn-outline-secondary my-2 my-sm-0" type="button">
+                            @Html.ActionLink("Выйти", "Logoff", "Authentification")
+                        </button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-outline-secondary mr-sm-2" type="button">
+                            @Html.ActionLink("Вход", "Login", "Authentification")
+                        </button>
+                        <button class="btn btn-sm btn-outline-secondary my-2 my-sm-0" type="button">
+                            @Html.ActionLink("Регистрация", "Register", "Authentification")
+                        </button>
+                    }
+                </form>
+            </div>
+        </nav>
+
     <div class="container">
-    @RenderBody()
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-        </div>
+        @RenderBody()
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </div>
     <footer>
-            © 2020 -
-            <a href="https://github.com/GurovaAnya">Гурова Анна</a>
+        © 2020 -
+        <a href="https://github.com/GurovaAnya">Гурова Анна</a>
     </footer>
 </body>
 </html>

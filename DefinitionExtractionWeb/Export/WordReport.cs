@@ -17,7 +17,6 @@ namespace DefinitionExtractionWeb.Export
         Word.Application app;
         Word.Document document;
         string path;
-        string name;
 
         public WordReport(string path, string templateName = "_template.docx")
         {

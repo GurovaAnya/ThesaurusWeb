@@ -8,6 +8,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DefinitionExtractionWeb.Models;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace DefinitionExtractionWeb.Controllers
 {
