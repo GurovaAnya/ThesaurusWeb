@@ -1,3 +1,22 @@
+/*.fade{
+    opacity: 1;
+}
+
+.modal .modal-dialog {
+    -webkit-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    transform: translate(0, 0);
+}
+
+.modal-backdrop .fade  {
+    opacity: 0.5 !important;
+}
+
+
+.modal-backdrop.fade {
+    opacity: 0.5 !important;
+}*/
+
 /*!
  * Bootstrap v4.5.0 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors

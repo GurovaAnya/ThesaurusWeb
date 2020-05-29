@@ -1,0 +1,66 @@
+﻿@model DefinitionExtractionWeb.Models.DefinitionLink
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DefinitionLink</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Definition.Definition_content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Definition.Definition_content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descriptor.Descriptor_content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descriptor.Descriptor_content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Start_char)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Start_char)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Length)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Length)
+        </dd>
+
+    </dl>
+</div>
+
+<textarea id="area" style="width:80%;height:60px">
+Выделите что-нибудь в этом тексте, чтобы обновить значения ниже.
+</textarea>
+<br>
+    От
+<input id="from" disabled> – До
+<input id="to" disabled>
+
+<script>
+    area.onselect = function () {
+       
+        from.value = area.selectionStart;
+        to.value = area.selectionEnd;
+    };
+</script>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

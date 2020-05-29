@@ -33,8 +33,10 @@ namespace DefinitionExtractionWeb.Controllers
                 }
                 if (user != null)
                 {
+                    ViewBag.ShowModal = null;
                     FormsAuthentication.SetAuthCookie(model.Email, true);
-                    return RedirectToAction("Index", "Home");
+                    return Redirect(Request.UrlReferrer.ToString());
+                    //return RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -107,5 +109,7 @@ namespace DefinitionExtractionWeb.Controllers
         {
             return user.Password_hash == GetHash(pass);
         }
+
+
     }
 }

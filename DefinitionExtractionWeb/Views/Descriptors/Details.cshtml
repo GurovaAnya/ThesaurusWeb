@@ -1,147 +1,10 @@
-﻿@*@model DefinitionExtractionWeb.Models.Descriptor
+﻿@model DefinitionExtractionWeb.Models.Descriptor
 
     @{
         ViewBag.Title = "Details";
     }
 
     <h2>Details</h2>
-
-    <div>
-        <h4>Descriptor</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Relator1.Content)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Relator1.Content)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Descriptor_content)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Descriptor_content)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Start_line)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Start_line)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Start_char)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Start_char)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.End_line)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.End_line)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.End_char)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.End_char)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Relator)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Relator)
-            </dd>
-
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>*@
-@model DefinitionExtractionWeb.Models.Descriptor
-
-@{
-    ViewBag.Title = Model.Descriptor_content;
-}
-
-@*<h2>@Model.Descriptor_content</h2>
-    <div class="info">
-        <p class="text-left">
-            @if (Model.Relator1 != null && Model.Relator1.Content.Length > 0)
-            {
-                @Model.Relator1.Content
-            }
-        </p>
-
-        <p class="text-left">
-            @Model.Start_line.ToString() @Model.Start_char @Model.End_line @Model.End_char
-        </p>
-        <p class="text-left">
-            @if (Model.Ascriptors.Count() > 0)
-            {
-                @Html.Label("Аскрипторы:")
-                foreach (var ascriptor in Model.Ascriptors)
-                {
-                    @ascriptor.Ascriptor_content
-                }
-            }
-        </p>
-        <p class="text-left">
-            @if (Model.Relations.Count() > 0 || Model.Relations1.Count() > 0)
-            {
-                @Html.Label("Зависисимости: ");
-                foreach (var rel in Model.Relations)
-                {
-                    @Html.Label(rel.Relation_types.Type_name + ": ");
-                    @Html.ActionLink(rel.Descriptor1.Descriptor_content, "Details", new { id = rel.Descriptor2_ID });
-                }
-                foreach (var rel in Model.Relations1)
-                {
-                    @Html.Label(rel.Relation_types.Type_name + ": ");
-                    @Html.ActionLink(rel.Descriptor.Descriptor_content, "Details", new { id = rel.Descriptor1_ID });
-                }
-            }
-        </p>
-
-        <div class="panel">
-            @Html.ActionLink("Редактировать", "Edit", "Descriptors", new { id = Model.ID }, null) | @Html.ActionLink("Удалить", "Delete", "Descriptors", new { id = Model.ID }, null)
-
-        </div>
-
-            @foreach (var definition in definitions)
-            {
-
-                <hr />
-
-                <div>
-                    <div class="panel">
-                        @Html.Label(definition.Definition_content)
-                    </div>
-                    <div class="panel">
-                        @Html.Label(definition.Start_line.ToString() + definition.Start_char + definition.End_line + definition.End_char)
-                    </div>
-                    <div class="panel">
-                        @Html.ActionLink("Редактировать ", "Edit", "Definitions1", new { id = definition.ID }, null) |
-                        @Html.ActionLink("Удалить", "Delete", "Definitions1", new { id = definition.ID }, null)
-                    </div>
-
-                </div>
-            }
-    </div>*@
 
 <h2>@Model.Descriptor_content</h2>
 <dl class="dl-horizontal">
@@ -196,9 +59,20 @@
 @Html.ActionLink("Редактировать", "Edit", "Descriptors", new { id = Model.ID }, null) | @Html.ActionLink("Удалить", "Delete", "Descriptors", new { id = Model.ID }, null)
 
 <h4>Определения</h4>
-@foreach (var definition in Model.Definitions)
-{
-    @Html.DisplayName(definition.Definition_content)
+@* Выводим определение с ссылками на другие термины *@
+    @foreach (var definition in Model.Definitions)
+    {
+        string text = definition.Definition_content;
+        int prevCharNum = 0;
+        foreach (var link in definition.DefinitionLinks.OrderBy(link => link.Start_char))
+        {
+            @Html.Label(text.Substring(prevCharNum, link.Start_char - prevCharNum).Replace(' ', '\u00A0'));
+       
+            @Html.ActionLink(text.Substring(link.Start_char, link.Length), "Details", new { id = link.Descriptor_ID });
+            prevCharNum = link.Start_char + link.Length;
+        }
+        @Html.Label(text.Substring(prevCharNum).Replace(' ', '\u00A0'))
+
     <dl class="dl-horizontal">
 
         <dt>
@@ -208,11 +82,10 @@
             @Html.Label(definition.Start_line.ToString() + definition.Start_char + definition.End_line + definition.End_char)
         </dd>
     </dl>
-    <div>
+    <p>
         @Html.ActionLink("Редактировать ", "Edit", "Definitions1", new { id = definition.ID }, null) |
+        @Html.ActionLink("Редактировать ссылки ", "Index", "DefinitionLinks", new { id = definition.ID }, null) |
         @Html.ActionLink("Удалить", "Delete", "Definitions1", new { id = definition.ID }, null)
-    </div>
-
-
+    </p>
 }
 

@@ -34,19 +34,20 @@ namespace DefinitionExtractionWeb.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Links = descriptor.DefinitionLinks.OrderBy(link => link.Start_char).ToList();
             return View(descriptor);
         }
 
         // GET: Descriptors/Create
         public ActionResult Create()
         {
-            if (User.Identity.IsAuthenticated)
-            {
+            if (!User.Identity.IsAuthenticated)
+                ViewBag.ShowModal = true;
+
+            
                 ViewBag.RelatorID = new SelectList(db.Relators, "ID", "Content");
                 return View();
-            }
-            else
-                return RedirectToAction("Login", "Authentification");
+            
         }
 
         // POST: Descriptors/Create
@@ -70,9 +71,10 @@ namespace DefinitionExtractionWeb.Controllers
         // GET: Descriptors/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                if (id == null)
+            if (!User.Identity.IsAuthenticated)
+                ViewBag.ShowModal = true;
+
+            if (id == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
@@ -83,9 +85,7 @@ namespace DefinitionExtractionWeb.Controllers
                 }
                 ViewBag.RelatorID = new SelectList(db.Relators, "ID", "Content", descriptor.RelatorID);
                 return View(descriptor);
-            }
-            else
-                return RedirectToAction("Login", "Authentification");
+           
         }
 
         // POST: Descriptors/Edit/5
@@ -108,9 +108,10 @@ namespace DefinitionExtractionWeb.Controllers
         // GET: Descriptors/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                if (id == null)
+            if (!User.Identity.IsAuthenticated)
+                ViewBag.ShowModal = true;
+
+            if (id == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
@@ -120,9 +121,7 @@ namespace DefinitionExtractionWeb.Controllers
                     return HttpNotFound();
                 }
                 return View(descriptor);
-            }
-            else
-                return RedirectToAction("Login", "Authentification");
+            
         }
 
         // POST: Descriptors/Delete/5

@@ -1,81 +1,29 @@
-﻿@model DefinitionExtractionWeb.Models.Descriptor
-
-@{
-    ViewBag.Title = Model.Descriptor_content;
-    var definitions = Model.Definitions;
-}
-
-<h2>Термин</h2>
-
-<div>
-    <h4>@Model.Descriptor_content</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-
-            @if(Model.Relator!=null && Model.Relator.Length>0)
-            {
-                @Model.Relator
-            }
-        </dt>
-
-        <dt>
-            @Model.Start_line @Model.Start_char @Model.End_line @Model.End_char
-        </dt>
-
-        <dt>
-            @if (Model.Ascriptors.Count() > 0)
-            {
-                Html.Label("Аскрипторы: ");
-                foreach (var ascriptor in Model.Ascriptors)
-                {
-                    Html.ActionLink(ascriptor.Ascriptor_content, "DescriptorView", ascriptor);
-                }
-            }
-        </dt>
-
-        <dt>
-            @if(Model.Relations.Count()>0 || Model.Relations1.Count() > 0)
-            {
-                Html.Label("Зависисимости: ");
-                foreach (var rel in Model.Relations)
-                {
-                    Html.Label(rel.Relation_types.Type_name + ": ");
-                    Html.ActionLink(rel.Descriptor.Descriptor_content, "DescriptorView", rel.Descriptor);
-                }
-                foreach(var rel in Model.Relations1)
-                {
-                    Html.Label(rel.Relation_types.Type_name + ": ");
-                    Html.ActionLink(rel.Descriptor1.Descriptor_content, "DescriptorView", rel.Descriptor1);
-                }
-            }
-
-        </dt>
-
-        <dt>
-            @Html.ActionLink("Редактировать", "Edit", "Definitions", new { id = Model.ID }, null) | @Html.ActionLink("Удалить", "Delete", "Definitions", new { id = Model.ID }, null)
-
-        </dt>
-    </dl>
-    @foreach(var definition in definitions)
-    {
-
-<dl class="dl-horizontal">
-
-    <dt>
-        @definition.Definition_content
-    </dt>
-
-    <dt>
-        @definition.Start_line @definition.Start_char @definition.End_line @definition.End_char
-    </dt>
-    @Html.ActionLink("Редактировать ", "Edit", "Definitions1", new { id = definition.ID }, null) | @Html.ActionLink("Удалить", "Delete", "Definitions1", new { id = definition.ID }, null)
-
-
-</dl>
-    }
-
+﻿
+@Scripts.Render("~/scripts/popper.js")
+<!-- Button trigger modal -->
+<div class="container">
+    <button type="button" class="btn btn-primary" id="mybutton" data-toggle="modal" data-target="#exampleModal">
+        Launch demo modal
+    </button>
 </div>
-<p>
-    @*@Html.ActionLink("Back to List", "Index")*@
-</p>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -33,20 +33,23 @@
                         </tr>
                     }
                 </table>
-
-                @Html.ActionLink("Сохранить", "DownloadStats", new { beg = ViewBag.Beg, end = ViewBag.End })
-
-
+                @Html.ActionLink("Сохранить", "DownloadStats", new { beg = ViewBag.Beg, end = ViewBag.End }, null)
             </div>
-
         </div>
+       
         <div class="col-md-6">
             <frame>
-                <p><img src="~/Charts/UsersDiagram.jpeg" /> </p>
+                @{
+                    string base64String = Convert.ToBase64String(ViewBag.Chart);
+                }
+                <img src="@String.Format("data:image/jpeg; base64,{0}", base64String)" style="width: auto; height: auto" />
+                @*<p><img src=@ViewBag.ChartName /> </p>*@
             </frame>
 
         </div>
     </div>
+
+
 
 }
 else

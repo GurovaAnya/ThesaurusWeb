@@ -12,23 +12,28 @@ namespace DefinitionExtractionWeb.Controllers
     public class HomeController : Controller
     {
         DEDatabaseEntities db = new DEDatabaseEntities();
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            IEnumerable<Descriptor> desc = await db.Descriptors.ToListAsync(); ;
-            ViewBag.Descriptors = desc;
             return View();
         }
 
-        public async Task<ActionResult> DescriptorView(int id)
+        public ActionResult DescriptorView()
         {
-            var desc = await db.Descriptors.FindAsync(id);
-            return View(desc);
+            return View();
         }
 
         [HttpGet]
         public ActionResult Search(string like="")
         {
             return RedirectToAction("Index", "Descriptors", new { like = like });
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

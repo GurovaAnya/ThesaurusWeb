@@ -1,0 +1,32 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <h4>Для доступа к ресурсу неоходима авторизация</h4>
+        <button class="close" data-dismiss="modal" area-hidden="true">🗙</button>
+    </div>
+    <div class="modal-body">
+        @using (Html.BeginForm("Login", "Authentification", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="email" name="email" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="password" name="password" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Войти" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>

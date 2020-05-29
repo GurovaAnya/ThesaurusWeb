@@ -13,7 +13,7 @@ namespace DefinitionExtractionWeb.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202005261308572_Initial"; }
+            get { return "202005281131541_Initial"; }
         }
         
         string IMigrationMetadata.Source

@@ -39,14 +39,12 @@ namespace DefinitionExtractionWeb.Controllers
         // GET: Definitions1/Create
         public ActionResult Create()
         {
-            if (User.Identity.IsAuthenticated)
-            {
+            if (!User.Identity.IsAuthenticated)
+                ViewBag.ShowModal = true;           
                 ViewBag.Descriptor_ID = new SelectList(db.Descriptors, "ID", "Descriptor_content");
                 ViewBag.User_ID = new SelectList(db.Users, "ID", "First_name");
                 return View();
-            }
-            else
-                return RedirectToAction("Login", "Authentification");
+
         }
 
         // POST: Definitions1/Create
@@ -71,8 +69,9 @@ namespace DefinitionExtractionWeb.Controllers
         // GET: Definitions1/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (User.Identity.IsAuthenticated)
-            {
+            if (!User.Identity.IsAuthenticated)
+                ViewBag.ShowModal = true;
+
                 if (id == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -85,9 +84,7 @@ namespace DefinitionExtractionWeb.Controllers
                 ViewBag.Descriptor_ID = new SelectList(db.Descriptors, "ID", "Descriptor_content", definition.Descriptor_ID);
                 ViewBag.User_ID = new SelectList(db.Users, "ID", "First_name", definition.User_ID);
                 return View(definition);
-            }
-            else
-                return RedirectToAction("Login", "Authentification");
+
         }
 
         // POST: Definitions1/Edit/5
@@ -111,8 +108,10 @@ namespace DefinitionExtractionWeb.Controllers
         // GET: Definitions1/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (User.Identity.IsAuthenticated)
-            {
+            if (!User.Identity.IsAuthenticated)
+                ViewBag.ShowModal = true;
+
+            
                 if (id == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -123,9 +122,6 @@ namespace DefinitionExtractionWeb.Controllers
                     return HttpNotFound();
                 }
                 return View(definition);
-            }
-            else
-                return RedirectToAction("Login", "Authentification");
         }
 
         // POST: Definitions1/Delete/5

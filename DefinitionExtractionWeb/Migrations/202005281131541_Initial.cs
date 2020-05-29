@@ -43,6 +43,7 @@ namespace DefinitionExtractionWeb.Migrations
                         ID = c.Int(nullable: false, identity: true),
                         Descriptor_ID = c.Int(nullable: false),
                         Start_char = c.Int(nullable: false),
+                        Length = c.Int(nullable: false),
                         Definition_ID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)

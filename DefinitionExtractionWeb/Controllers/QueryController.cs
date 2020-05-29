@@ -31,5 +31,13 @@ namespace DefinitionExtractionWeb.Controllers
             ViewBag.Type_ID = new SelectList(db.Relation_types, "ID", "Type_name", que.RelationTypeID);
             return PartialView("_DisplayDescriptorsPartial", result);
         }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

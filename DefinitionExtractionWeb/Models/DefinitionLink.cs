@@ -16,6 +16,9 @@ namespace DefinitionExtractionWeb.Models
         [Display(Name = "Номер начального символа")]
         public int Start_char { get; set; }
 
+        [Display(Name = "Длина выражения")]
+        public int Length { get; set; }
+
         [Display(Name = "Определение-источник")]
         public int Definition_ID { get; set; }
 
