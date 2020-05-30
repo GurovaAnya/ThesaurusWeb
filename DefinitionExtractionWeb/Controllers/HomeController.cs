@@ -27,6 +27,12 @@ namespace DefinitionExtractionWeb.Controllers
         {
             return RedirectToAction("Index", "Descriptors", new { like = like });
         }
+
+        public ActionResult About()
+        {
+            return View();
+        }
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)

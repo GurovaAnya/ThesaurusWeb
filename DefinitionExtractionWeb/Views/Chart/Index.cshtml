@@ -1,5 +1,5 @@
 ﻿
-@model DateTime[]
+@model DefinitionExtractionWeb.ViewModels.PeriodViewModel
 
 @{
     ViewBag.Title = "Отчет";
@@ -9,27 +9,26 @@
 
 @using (Ajax.BeginForm("Submit", new AjaxOptions { UpdateTargetId = "results", HttpMethod = "Post", InsertionMode = InsertionMode.Replace }))
 {
-    <div class="row">
+    <div class="row form-group">
 
         <div class="col-md-6">
             @Html.Label("Начало", htmlAttributes: new { @class = "control-label col-md-2" })
             <div>
-                @Html.EditorFor(model => model[0], new { htmlAttributes = new { @class = "form-control datepicker", @id = "time1", @Value = Model[0].ToString("dd.MM.yyyy") } })
-                @Html.ValidationMessageFor(model => model[0], "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Beg, new { htmlAttributes = new { @class = "form-control "} })
             </div>
         </div>
 
         <div class="col-md-6">
             @Html.Label("Конец", htmlAttributes: new { @class = "control-label col-md-2" })
             <div>
-                @Html.EditorFor(model => model[1], new { htmlAttributes = new { @class = "form-control datepicker", @id = "time2", @Value = Model[1].ToString("dd.MM.yyyy") } })
-                @Html.ValidationMessageFor(model => model[1], "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.End, new { htmlAttributes = new { @class = "form-control datepicker", @id = "time2" } })
+                @Html.ValidationMessageFor(model => model.End, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
     <div class="form-group">
         <div class="offset-5 col-md-2">
-            <input type="submit" value="Искать" class="btn btn-outline-secondary" onclick="myFunction()"/>
+            <input type="submit" value="Искать" class="btn btn-outline-secondary"/>
         </div>
     </div>
 }

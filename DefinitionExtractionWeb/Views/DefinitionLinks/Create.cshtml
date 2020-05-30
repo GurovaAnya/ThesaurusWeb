@@ -1,10 +1,10 @@
 ﻿@model DefinitionExtractionWeb.Models.DefinitionLink
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Создать";
 }
 
-<h2>Create</h2>
+<h2>Создать связь</h2>
 
 @using (Html.BeginForm())
 {
@@ -72,5 +72,5 @@
 </script>
 
 <div>
-    @Html.ActionLink("Back to List", "Index", new { id = Model.Definition_ID})
+    @Html.ActionLink("Назад к списку", "Index", new { id = Model.Definition_ID})
 </div>

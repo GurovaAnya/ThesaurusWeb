@@ -1,12 +1,11 @@
 ﻿@model DefinitionExtractionWeb.Models.Descriptor
 
-    @{
-        ViewBag.Title = "Details";
-    }
-
-    <h2>Details</h2>
+@{
+    ViewBag.Title = Model.Descriptor_content;
+}
 
 <h2>@Model.Descriptor_content</h2>
+
 <dl class="dl-horizontal">
     @if (Model.Relator1 != null && Model.Relator1.Content.Length > 0)
     {
@@ -60,19 +59,23 @@
 
 <h4>Определения</h4>
 @* Выводим определение с ссылками на другие термины *@
-    @foreach (var definition in Model.Definitions)
-    {
+
+@foreach (var definition in Model.Definitions)
+{
+    <div class="text-body">
+        @{
         string text = definition.Definition_content;
         int prevCharNum = 0;
         foreach (var link in definition.DefinitionLinks.OrderBy(link => link.Start_char))
         {
-            @Html.Label(text.Substring(prevCharNum, link.Start_char - prevCharNum).Replace(' ', '\u00A0'));
-       
-            @Html.ActionLink(text.Substring(link.Start_char, link.Length), "Details", new { id = link.Descriptor_ID });
-            prevCharNum = link.Start_char + link.Length;
+        @Html.Label(text.Substring(prevCharNum, link.Start_char - prevCharNum).Replace(' ', '\u00A0'));
+
+        @Html.ActionLink(text.Substring(link.Start_char, link.Length), "Details", new { id = link.Descriptor_ID });
+        prevCharNum = link.Start_char + link.Length;
         }
         @Html.Label(text.Substring(prevCharNum).Replace(' ', '\u00A0'))
-
+        }
+    </div>
     <dl class="dl-horizontal">
 
         <dt>
@@ -87,5 +90,9 @@
         @Html.ActionLink("Редактировать ссылки ", "Index", "DefinitionLinks", new { id = definition.ID }, null) |
         @Html.ActionLink("Удалить", "Delete", "Definitions1", new { id = definition.ID }, null)
     </p>
+
+    <div>
+        @Html.ActionLink("Добавить определение", "CreateForDescriptor", "Definitions1", new { descriptorID = Model.ID }, null)
+    </div>
 }
 

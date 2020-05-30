@@ -43,13 +43,9 @@
                     string base64String = Convert.ToBase64String(ViewBag.Chart);
                 }
                 <img src="@String.Format("data:image/jpeg; base64,{0}", base64String)" style="width: auto; height: auto" />
-                @*<p><img src=@ViewBag.ChartName /> </p>*@
             </frame>
-
         </div>
     </div>
-
-
 
 }
 else

@@ -1,10 +1,10 @@
 ﻿@model DefinitionExtractionWeb.Models.DefinitionLink
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Редактировать связь с " + Model.Descriptor.Descriptor_content;
 }
 
-<h2>Edit</h2>
+<h2>Редактировать</h2>
 
 @using (Html.BeginForm())
 {
@@ -57,7 +57,7 @@
 
     <div class="form-group">
         <div class="offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-secondary" />
+            <input type="submit" value="Сохранить" class="btn btn-secondary" />
         </div>
     </div>
 </div>
@@ -75,5 +75,5 @@
 </script>
 
 <div>
-    @Html.ActionLink("Back to List", "Index", new {id = Model.Definition_ID})
+    @Html.ActionLink("Назад к списку", "Index", new {id = Model.Definition_ID})
 </div>

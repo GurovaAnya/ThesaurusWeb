@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DefinitionExtractionWeb.Models;
+using DocumentFormat.OpenXml.Drawing.Diagrams;
 
 namespace DefinitionExtractionWeb.Controllers
 {
@@ -46,14 +47,28 @@ namespace DefinitionExtractionWeb.Controllers
                 return View();
 
         }
+        
+        // GET: Definitions1/Create
+        public ActionResult CreateForDescriptor(int descriptorID)
+        {
+            if (!User.Identity.IsAuthenticated)
+                ViewBag.ShowModal = true;           
+            ViewBag.Descriptor_ID = new SelectList(db.Descriptors, "ID", "Descriptor_content");
+            ViewBag.User_ID = new SelectList(db.Users, "ID", "First_name");
+            Definition def = new Definition() { Descriptor_ID = descriptorID };
+            return View("Create", def);
+
+        }
 
         // POST: Definitions1/Create
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Descriptor_ID,Definition_content,Start_line,Start_char,End_line,End_char,User_ID,Insert_date")] Definition definition)
+        public ActionResult Create([Bind(Include = "ID,Descriptor_ID,Definition_content,Start_line,Start_char,End_line,End_char")] Definition definition)
         {
+            definition.Insert_date = DateTime.Now;
+            definition.User = db.Users.Where(user => user.Email == User.Identity.Name).FirstOrDefault();
             if (ModelState.IsValid)
             {
                 db.Definitions.Add(definition);
@@ -65,6 +80,8 @@ namespace DefinitionExtractionWeb.Controllers
             ViewBag.User_ID = new SelectList(db.Users, "ID", "First_name", definition.User_ID);
             return View(definition);
         }
+
+
 
         // GET: Definitions1/Edit/5
         public ActionResult Edit(int? id)

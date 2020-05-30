@@ -222,6 +222,7 @@
     <Compile Include="ViewModels\Authentification\LoginViewModel.cs" />
     <Compile Include="ViewModels\Authentification\RegisterViewModel.cs" />
     <Compile Include="ViewModels\ChartViewModel.cs" />
+    <Compile Include="ViewModels\PeriodViewModel.cs" />
     <Compile Include="ViewModels\QueryViewModel.cs" />
     <Compile Include="ViewModels\StatsViewModel.cs" />
     <Compile Include="ViewModels\UserTableViewModel.cs" />
@@ -388,12 +389,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Definitions\Index.cshtml" />
     <Content Include="Views\Home\DescriptorView.cshtml" />
-    <Content Include="Views\Definitions\DescriptorsList.cshtml" />
-    <Content Include="Views\Definitions\Edit.cshtml" />
-    <Content Include="Views\Definitions\Delete.cshtml" />
-    <Content Include="Views\Definitions\Create.cshtml" />
     <Content Include="Views\Definitions1\Create.cshtml" />
     <Content Include="Views\Definitions1\Delete.cshtml" />
     <Content Include="Views\Definitions1\Details.cshtml" />
@@ -403,7 +399,6 @@
     <Content Include="Views\Query\Edit.cshtml" />
     <Content Include="Views\Query\Index.cshtml" />
     <Content Include="Views\Query\Results.cshtml" />
-    <Content Include="Views\Shared\_DisplayDescriptorsPartial.cshtml" />
     <Content Include="Views\Users\Create.cshtml" />
     <Content Include="Views\Users\Delete.cshtml" />
     <Content Include="Views\Users\Details.cshtml" />
@@ -430,7 +425,6 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Shared\_LoginPopUpPartial.cshtml" />
-    <Content Include="Views\test.cshtml" />
     <Content Include="Views\DefinitionLinks\Create.cshtml" />
     <Content Include="Views\DefinitionLinks\Delete.cshtml" />
     <Content Include="Views\DefinitionLinks\Details.cshtml" />

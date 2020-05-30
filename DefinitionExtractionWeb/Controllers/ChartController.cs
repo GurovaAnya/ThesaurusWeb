@@ -17,14 +17,12 @@ namespace DefinitionExtractionWeb.Controllers
 {
     public class ChartController : Controller
     {
-        //DEDatabaseEntities db = new DEDatabaseEntities();
-
         // GET: Charts
         public ActionResult Index()
         {
             if (!HttpContext.User.Identity.IsAuthenticated)
                 ViewBag.ShowModal = true;
-                return View(new DateTime[] { DateTime.Now, DateTime.Now });
+                return View(new PeriodViewModel(){ Beg= DateTime.Now, End=DateTime.Now });
 
         }
 
@@ -35,26 +33,14 @@ namespace DefinitionExtractionWeb.Controllers
         /// <param name="dates">Границы добавления определений</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult> Submit(DateTime [] dates)
+        public async Task<ActionResult> Submit(PeriodViewModel model)
         {
-            if (dates[0] == new DateTime() || dates[1] == new DateTime())
-                throw new Exception("Мы собираемся работать, м????");
-            try
-            {
-                DEQueries deq = new DEQueries();
-                var info = await deq.GetUsersStatistics(dates[0], dates[1]);
-                //ViewBag.Info = info;
-                ViewBag.Beg = dates[0];
-                ViewBag.End = dates[1];
-                //TempData["Beg"] = dates[0];
-                //TempData["End"] = dates[1];
-                ViewBag.Chart = GenerateChartImage(info);
-                return PartialView("_ChartViewPartial", info);
-            }catch(Exception e)
-            {
-                return new HttpNotFoundResult(e.Message);
-            }
-                
+            DEQueries deq = new DEQueries();
+            var info = await deq.GetUsersStatistics(model.Beg, model.End);
+            ViewBag.Beg = model.Beg;
+            ViewBag.End = model.End;
+            ViewBag.Chart = GenerateChartImage(info);
+            return PartialView("_ChartViewPartial", info);
         }
 
         /// <summary>
@@ -98,6 +84,7 @@ namespace DefinitionExtractionWeb.Controllers
             Response.End();
             //Удаляем файл после возвращения
             System.IO.File.Delete(Server.MapPath("~/Charts/" + name));
+
             return new EmptyResult();
         }
 

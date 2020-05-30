@@ -21,6 +21,8 @@ namespace DefinitionExtractionWeb.Export
     {
         public static void SearchAndReplace(string template, string path, string currentUser, string period, List<ViewModels.UserTableViewModel> stats)
         {
+            WordprocessingDocument wordprocessingDocument = WordprocessingDocument.Open(template, false);
+            var newDoc =  wordprocessingDocument.Clone();
             File.Copy(template, path);
             using (WordprocessingDocument wordDocument = WordprocessingDocument.Open(path, true))
             {

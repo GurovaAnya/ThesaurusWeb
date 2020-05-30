@@ -1,12 +1,12 @@
 ﻿@model DefinitionExtractionWeb.Models.DefinitionLink
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Удалить";
 }
 
-<h2>Delete</h2>
+<h2>Удалить связь</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Вы действительно хотите удалить данный элемент?</h3>
 <div>
     <h4>DefinitionLink</h4>
     <hr />
@@ -50,7 +50,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index", new { id = Model.Definition_ID})
+            @Html.ActionLink("Назад к списку", "Index", new { id = Model.Definition_ID})
         </div>
     }
 </div>

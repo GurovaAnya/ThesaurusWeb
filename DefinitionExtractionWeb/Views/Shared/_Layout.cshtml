@@ -52,15 +52,14 @@
     </div>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #333333;">
-        <a class="navbar-brand" href="#">Тезаурус</a>
+        @Html.ActionLink("Тезаурус", "Index", "Home", null, htmlAttributes: new { @class = "navbar-brand" })
+       
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    @Html.ActionLink("Главная", "Index", "Home", null, htmlAttributes: new { @class = "nav-link" })
-                </li>
+
                 <li class="nav-item">
                     @Html.ActionLink("Отчеты", "Index", "Chart", null, htmlAttributes: new { @class = "nav-link" })
                 </li>
@@ -102,8 +101,7 @@
         @RenderSection("scripts", required: false)
     </div>
     <footer>
-        © 2020 -
-        <a href="https://github.com/GurovaAnya">Гурова Анна</a>
+                © 2020 - @Html.ActionLink("Тезаурус", "About", "Home")
     </footer>
 
         <script type="text/javascript">
