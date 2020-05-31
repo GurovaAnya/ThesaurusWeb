@@ -1,0 +1,76 @@
+﻿@model DefinitionExtractionWeb.Models.DefinitionLink
+
+@{
+    ViewBag.Title = "Создать";
+}
+
+<h2>Создать связь</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>DefinitionLink</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Descriptor_ID, "Descriptor_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Descriptor_ID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Descriptor_ID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="alert-info offset-2">
+            @Html.Label("Выделите текст в форме ниже")
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Definition.Definition_content, "Definition_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Definition.Definition_content, new { htmlAttributes = new { @class = "form-control", @id = "area", @readonly = "readonly" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Start_char, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Start_char, new { htmlAttributes = new { @class = "form-control", @id = "from", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Start_char, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Length, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Length, new { htmlAttributes = new { @class = "form-control", @id = "to", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Length, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.Definition_ID)
+
+
+        <div class="form-group">
+            <div class="offset-2 col-md-10">
+                <input type="submit" value="Сохранить" class="btn btn-secondary" />
+            </div>
+        </div>
+    </div>
+}
+
+
+<script>
+    area.onselect = function () {
+        document.getElementById('from').value = area.selectionStart;
+        from.value = area.selectionStart;
+        to.value = area.selectionEnd;
+        document.getElementById('to').value = area.selectionEnd - area.selectionStart;
+
+    };
+</script>
+
+<div>
+    @Html.ActionLink("Назад к списку", "Index", new { id = Model.Definition_ID})
+</div>

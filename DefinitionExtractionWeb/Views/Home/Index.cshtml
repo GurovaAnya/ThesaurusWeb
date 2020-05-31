@@ -1,5 +1,6 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var db = new DefinitionExtractionWeb.Models.DEDatabaseEntities();
 }
 
 <!DOCTYPE html>
@@ -10,19 +11,24 @@
     <title>Тезаурус</title>
 </head>
 <body>
-    <div>
-        <h3>Термины</h3>
-        <table>
-            <tr>
-                <td><p>Термин</p></td>
-            </tr>
-            @foreach (var desc in ViewBag.Descriptors)
-            {
-                <tr>
-                    <td><p><a href="/Home/More/@desc.ID">@desc.Descriptor_content </a>(@desc.Relator)</p></td>
-\                </tr>
-            }
-        </table>
+    <div class="text-center">
+        <h1>Тезаурус</h1>
+
+        Введите термин и найдите определение для него!
     </div>
+    <searchbox>
+        
+        <form method="get" action="/Home/Search">
+            <div class="row row-no-gutters">
+                <div class="offset-md-4 col-md-3">
+                    @Html.Editor("like", null, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="col-md-1">
+                    <input type="submit" value="Искать" class="btn btn-outline-secondary" />
+                </div>
+            </div>
+            @Html.ActionLink("Показать все", "Index", "Descriptors")
+        </form>
+    </searchbox>
 </body>
 </html>

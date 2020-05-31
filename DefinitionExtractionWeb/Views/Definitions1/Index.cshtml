@@ -1,0 +1,75 @@
+﻿@model IEnumerable<DefinitionExtractionWeb.Models.Definition>
+
+@{
+    ViewBag.Title = "Определения";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Создать новый", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Definition_content)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Start_line)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Start_char)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.End_line)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.End_char)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Insert_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descriptor.Descriptor_content)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.First_name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Definition_content)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Start_line)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Start_char)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.End_line)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.End_char)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Insert_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descriptor.Descriptor_content)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.First_name)
+        </td>
+        <td>
+            @Html.ActionLink("Редактировать", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Подробнее", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

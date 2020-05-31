@@ -3,15 +3,125 @@
 <head>
     <meta charset="utf-8" />
     <title>@ViewBag.Title</title>
-    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @RenderSection("Content", false)
+    @Scripts.Render("~/scripts/jquery-3.4.1.js")
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
+    @Scripts.Render("~/scripts/bootstrap.js")
 </head>
 
 <body>
-    <nav>
-        <ul class="menu">
-            <li>@Html.ActionLink("Главная", "Index", "Home")</li>
-        </ul>
+
+    <div id="modDialog" class="modal " data-backdrop="false" data-keyboard="false">
+        <div id="dialogContent" class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Для доступа к ресурсу неоходима авторизация</h4>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("Login", "Authentification", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-horizontal">
+
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    <input type="email" name="email" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    <input type="password" name="password" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Войти" class="btn btn-primary" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #333333;">
+        @Html.ActionLink("Тезаурус", "Index", "Home", null, htmlAttributes: new { @class = "navbar-brand" })
+       
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+                    @Html.ActionLink("Отчеты", "Index", "Chart", null, htmlAttributes: new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Фильтр", "Index", "Query", null, htmlAttributes: new { @class = "nav-link" })
+                </li>
+            </ul>
+
+            <form class="form-inline">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="nav-item">
+                        <a class="text-light">
+                            @HttpContext.Current.User.Identity.Name
+                        </a>
+                    </div>
+
+                    <button class="btn btn-outline-secondary my-2 my-sm-0" type="button">
+                        @Html.ActionLink("Выйти", "Logoff", "Authentification")
+                    </button>
+                }
+                else
+                {
+                    <button class="btn btn-outline-secondary mr-sm-2" type="button">
+                        @Html.ActionLink("Вход", "Login", "Authentification")
+                    </button>
+                    <button class="btn btn-sm btn-outline-secondary my-2 my-sm-0" type="button">
+                        @Html.ActionLink("Регистрация", "Register", "Authentification")
+                    </button>
+                }
+            </form>
+        </div>
     </nav>
-    @RenderBody()
+
+    <div class="container">
+        @RenderBody()
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </div>
+    <footer>
+                © 2020 - @Html.ActionLink("Тезаурус", "About", "Home")
+    </footer>
+
+        <script type="text/javascript">
+            function show() {
+                $("#dialog").dialog();
+        }
+    </script>
+
+    @if (ViewBag.ShowModal!=null)
+    {
+<script type="text/javascript">
+    $(window).on('load', function () {
+        $('#modDialog').modal('show');
+    });
+</script>
+    }
+
+    
 </body>
 </html>
+
+
+
