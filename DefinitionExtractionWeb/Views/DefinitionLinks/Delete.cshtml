@@ -1,0 +1,56 @@
+﻿@model DefinitionExtractionWeb.Models.DefinitionLink
+
+@{
+    ViewBag.Title = "Удалить";
+}
+
+<h2>Удалить связь</h2>
+
+<h3>Вы действительно хотите удалить данный элемент?</h3>
+<div>
+    <h4>DefinitionLink</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Definition.Definition_content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Definition.Definition_content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descriptor.Descriptor_content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descriptor.Descriptor_content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Start_char)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Start_char)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Length)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Length)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Назад к списку", "Index", new { id = Model.Definition_ID})
+        </div>
+    }
+</div>

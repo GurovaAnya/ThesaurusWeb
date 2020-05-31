@@ -2,77 +2,97 @@
 
 @{
     ViewBag.Title = Model.Descriptor_content;
-    var definitions = Model.Definitions;
 }
 
-<h2>Термин</h2>
+<h2>@Model.Descriptor_content</h2>
 
-<div>
-    <h4>@Model.Descriptor_content</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-
-            @if (Model.Relator != null && Model.Relator.Length > 0)
-            {
-                @Model.Relator
-            }
-        </dt>
-
-        <dt>
-            @Model.Start_line @Model.Start_char @Model.End_line @Model.End_char
-        </dt>
-
-        <dt>
-            @if (Model.Ascriptors.Count() > 0)
-            {
-                Html.Label("Аскрипторы: ");
-                foreach (var ascriptor in Model.Ascriptors)
-                {
-                    Html.ActionLink(ascriptor.Ascriptor_content, "DescriptorView", ascriptor);
-                }
-            }
-        </dt>
-
-        <dt>
-            @if (Model.Relations.Count() > 0 || Model.Relations1.Count() > 0)
-            {
-                Html.Label("Зависисимости: ");
-                foreach (var rel in Model.Relations)
-                {
-                    Html.Label(rel.Relation_types.Type_name + ": ");
-                    Html.ActionLink(rel.Descriptor.Descriptor_content, "DescriptorView", rel.Descriptor);
-                }
-                foreach (var rel in Model.Relations1)
-                {
-                    Html.Label(rel.Relation_types.Type_name + ": ");
-                    Html.ActionLink(rel.Descriptor1.Descriptor_content, "DescriptorView", rel.Descriptor1);
-                }
-            }
-
-        </dt>
-
-        <dt>
-            @Html.ActionLink("Редактировать", "Edit", "Descriptors", new { id = Model.ID }, null) | @Html.ActionLink("Удалить", "Delete", "Descriptors", new { id = Model.ID }, null)
-
-        </dt>
-    </dl>
-    @foreach (var definition in definitions)
+<dl class="dl-horizontal">
+    @if (Model.Relator1 != null && Model.Relator1.Content.Length > 0)
     {
-
-        <dl class="dl-horizontal">
-
-            <dt>
-                @definition.Definition_content
-            </dt>
-
-            <dt>
-                @definition.Start_line @definition.Start_char @definition.End_line @definition.End_char
-            </dt>
-            @Html.ActionLink("Редактировать ", "Edit", "Definitions1", new { id = definition.ID }, null) | @Html.ActionLink("Удалить", "Delete", "Definitions1", new { id = definition.ID }, null)
-
-
-        </dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.Relator1.Content)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Relator1.Content)
+        </dd>
     }
 
-</div>
+    <dt>
+        @Html.Label("Источник")
+    </dt>
+    <dd>
+        @Model.Start_line.ToString() @Model.Start_char @Model.End_line @Model.End_char
+    </dd>
+    @if (Model.Ascriptors.Count() > 0)
+    {
+        <dt>
+            @Html.Display("Аскрипторы:")
+        </dt>
+        <dd>
+            @foreach (var ascriptor in Model.Ascriptors)
+            {
+                @Html.Display(ascriptor.Ascriptor_content)
+            }
+
+        </dd>
+    }
+    @if (Model.Relations.Count() > 0 || Model.Relations1.Count() > 0)
+    {
+        <dt>
+            @Html.Label("Зависисимости: ")
+        </dt>
+        <dd>
+            @foreach (var rel in Model.Relations)
+            {
+                @Html.Label(rel.Relation_types.Type_name + ": ")
+                @Html.ActionLink(rel.Descriptor1.Descriptor_content, "Details", new { id = rel.Descriptor2_ID })
+            }
+            @foreach (var rel in Model.Relations1)
+            {
+                @Html.Label(rel.Relation_types.Type_name + ": ")
+                @Html.ActionLink(rel.Descriptor.Descriptor_content, "Details", new { id = rel.Descriptor1_ID })
+            }
+        </dd>
+    }
+</dl>
+@Html.ActionLink("Редактировать", "Edit", "Descriptors", new { id = Model.ID }, null) | @Html.ActionLink("Удалить", "Delete", "Descriptors", new { id = Model.ID }, null)
+
+<h4>Определения</h4>
+@* Выводим определение с ссылками на другие термины *@
+
+@foreach (var definition in Model.Definitions)
+{
+    <div class="text-body">
+        @{
+        string text = definition.Definition_content;
+        int prevCharNum = 0;
+        foreach (var link in definition.DefinitionLinks.OrderBy(link => link.Start_char))
+        {
+        @Html.Label(text.Substring(prevCharNum, link.Start_char - prevCharNum).Replace(' ', '\u00A0'));
+
+        @Html.ActionLink(text.Substring(link.Start_char, link.Length), "Details", new { id = link.Descriptor_ID });
+        prevCharNum = link.Start_char + link.Length;
+        }
+        @Html.Label(text.Substring(prevCharNum).Replace(' ', '\u00A0'))
+        }
+    </div>
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.Label("Источник")
+        </dt>
+        <dd>
+            @Html.Label(definition.Start_line.ToString() + definition.Start_char + definition.End_line + definition.End_char)
+        </dd>
+    </dl>
+    <p>
+        @Html.ActionLink("Редактировать ", "Edit", "Definitions1", new { id = definition.ID }, null) |
+        @Html.ActionLink("Редактировать ссылки ", "Index", "DefinitionLinks", new { id = definition.ID }, null) |
+        @Html.ActionLink("Удалить", "Delete", "Definitions1", new { id = definition.ID }, null)
+    </p>
+
+    <div>
+        @Html.ActionLink("Добавить определение", "CreateForDescriptor", "Definitions1", new { descriptorID = Model.ID }, null)
+    </div>
+}
+

@@ -14,31 +14,32 @@ namespace DefinitionExtractionWeb.Controllers
         DEDatabaseEntities db = new DEDatabaseEntities();
         public ActionResult Index()
         {
-            IEnumerable<Descriptor> desc = db.Descriptors;
-            ViewBag.Descriptors = desc;
             return View();
         }
 
-        public async Task<ActionResult> DescriptorView(int id)
+        public ActionResult DescriptorView()
         {
-            //ViewBag.Definitions = db.Descriptors.Find(id);
-            var desc = await db.Descriptors.FindAsync(id);
-            return View(desc);
+            return View();
         }
 
         [HttpGet]
         public ActionResult Search(string like="")
         {
             return RedirectToAction("Index", "Descriptors", new { like = like });
-            var descriptors = db.Descriptors.Where(d => d.Descriptor_content.StartsWith(like));
-            return View("~/Views/Definitions/DescriptorsList.cshtml", descriptors);
         }
 
-        //[HttpPost]
-        //public ActionResult Search(string like)
-        //{
-        //    ViewBag.Descriptors = db.Descriptors.Where(d => d.Descriptor_content.StartsWith(like));
-        //    return View("Descriptors/Index");
-        //}
+        public ActionResult About()
+        {
+            return View();
+        }
+        
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }
